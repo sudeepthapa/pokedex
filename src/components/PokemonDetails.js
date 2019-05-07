@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import React, { Component } from 'react';
 import Axios from 'axios';
 import {Link} from 'react-router-dom';
+import Loading from './loading';
 
 const StyledLink = styled(Link)`
     text-decoration:none;
@@ -40,7 +41,7 @@ export default class Pokemon extends Component {
     types: [],
     description: '',
     statTitleWidth: 3,
-    statBarWidth: 9,
+    statBarWidth: 8,
     stats: {
       hp: '',
       attack: '',
@@ -58,7 +59,8 @@ export default class Pokemon extends Component {
     genderRatioFemale: '',
     evs: '',
     hatchSteps: '',
-    themeColor: '#EF5350'
+    themeColor: '#EF5350',
+    loading:true
   };
 
   async componentDidMount() {
@@ -192,12 +194,19 @@ export default class Pokemon extends Component {
       height,
       weight,
       abilities,
-      evs
+      evs,
+      loading:false
     });
+
+
   }
 
   render() {
-    return (
+
+    if(this.state.loading){
+      return <Loading image = "/images/loading2.gif" />
+    }
+   return (
       <div className="container">
         <div className="card mt-4">
           <div className="card-header">
